@@ -1,0 +1,16 @@
+version: "3.5"
+services:
+  tautulli:
+    container_name: ${PLEXFLIX_COMPANION_PROJECT_NAME}-tautulli
+    environment:
+      - PUID=${PLEXFLIX_COMPANION_USER}
+      - PGID=${PLEXFLIX_COMPANION_GROUP}
+      - TZ=${PLEXFLIX_COMPANION_TIMEZONE}
+    image: linuxserver/tautulli:latest
+    networks:
+      - plexflix-companion
+    ports:
+      - ${TAUTULLI_PORT}:8181
+    restart: unless-stopped
+    volumes:
+      - ${TAUTULLI_CONFIG_PATH}:/config:delegated

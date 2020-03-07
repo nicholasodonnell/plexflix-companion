@@ -1,0 +1,13 @@
+#!/usr/bin/with-contenv sh
+
+# make dirs
+mkdir -p /config
+mkdir -p /dev/fuse
+
+# make empty conf file
+touch /config/.rclone.conf
+
+# permissions
+chown -R abc:abc /config
+chown -R abc:abc /dev/fuse
+chmod a+x /dev/fuse

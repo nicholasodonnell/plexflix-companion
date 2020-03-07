@@ -1,0 +1,18 @@
+version: "3.5"
+services:
+  radarr:
+    container_name: ${PLEXFLIX_COMPANION_PROJECT_NAME}-radarr
+    environment:
+      - PUID=${PLEXFLIX_COMPANION_USER}
+      - PGID=${PLEXFLIX_COMPANION_GROUP}
+      - TZ=${PLEXFLIX_COMPANION_TIMEZONE}
+    image: linuxserver/radarr:latest
+    networks:
+      - plexflix-companion
+    ports:
+      - ${RADARR_PORT}:7878
+    restart: unless-stopped
+    volumes:
+      - ${RADARR_CONFIG_PATH}:/config:delegated
+      - ${PLEXFLIX_COMPANION_LIBRARIES_MOUNT_PATH}:/libraries:shared
+      - ${PLEXFLIX_COMPANION_DOWNLOADS_PATH}:/downloads:delegated

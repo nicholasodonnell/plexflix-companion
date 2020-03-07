@@ -1,0 +1,17 @@
+version: "3.5"
+services:
+  nzbget:
+    container_name: ${PLEXFLIX_COMPANION_PROJECT_NAME}-nzbget
+    environment:
+      - PUID=${PLEXFLIX_COMPANION_USER}
+      - PGID=${PLEXFLIX_COMPANION_GROUP}
+      - TZ=${PLEXFLIX_COMPANION_TIMEZONE}
+    image: linuxserver/nzbget:latest
+    networks:
+      - plexflix-companion
+    ports:
+      - ${NZBGET_PORT}:6789
+    restart: unless-stopped
+    volumes:
+      - ${NZBGET_CONFIG_PATH}:/config:delegated
+      - ${PLEXFLIX_COMPANION_LIBRARIES_MOUNT_PATH}:/downloads:delegated

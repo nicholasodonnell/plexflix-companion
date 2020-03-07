@@ -1,0 +1,30 @@
+version: "3.5"
+services:
+  rclone:
+    build:
+      context: ./rclone
+    cap_add:
+      - MKNOD
+      - SYS_ADMIN
+    container_name: ${PLEXFLIX_COMPANION_PROJECT_NAME}-rclone
+    devices:
+      - /dev/fuse
+    environment:
+      - PUID=${PLEXFLIX_COMPANION_USER}
+      - PGID=${PLEXFLIX_COMPANION_GROUP}
+      - RCLONE_REMOTE_MOUNT=${RCLONE_REMOTE_MOUNT}
+      - RCLONE_MOUNT_OPTIONS=${RCLONE_MOUNT_OPTIONS}
+    healthcheck:
+      test: "[ -f /data/.mountcheck ] && exit 0 || exit 1"
+      interval: 10s
+      timeout: 10s
+      start_period: 10s
+    image: ${PLEXFLIX_COMPANION_PROJECT_NAME}/rclone:latest
+    networks:
+      - plexflix-companion
+    restart: unless-stopped
+    security_opt:
+      - apparmor:unconfined
+    volumes:
+      - ${RCLONE_CONFIG_PATH}:/config:delegated
+      - ${PLEXFLIX_COMPANION_LIBRARIES_MOUNT_PATH}:/data:shared
