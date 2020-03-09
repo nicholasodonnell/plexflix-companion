@@ -96,7 +96,7 @@ else
 endif
 
 mount-health: ## check mount health
-	@echo "Rclone: $(call get_service_health,rclone)"
+	@echo "rclone: $(call get_service_health,rclone)"
 
 	@docker-compose ${PLEXFLIX_COMPANION_DOCKER_COMPOSE_ARGS} \
 		run \
