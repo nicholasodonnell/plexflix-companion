@@ -14,4 +14,4 @@ services:
     restart: unless-stopped
     volumes:
       - ${NZBGET_CONFIG_PATH}:/config:delegated
-      - ${PLEXFLIX_COMPANION_LIBRARIES_MOUNT_PATH}:/downloads:delegated
+      - ${PLEXFLIX_COMPANION_DOWNLOADS_PATH}:/downloads:delegated
