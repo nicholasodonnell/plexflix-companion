@@ -1,5 +1,6 @@
 include .env
 
+SHELL := /bin/bash
 PLEXFLIX_COMPANION_DOCKER_COMPOSE_COMMON_FILE := docker-compose.common.yml
 PLEXFLIX_COMPANION_DOCKER_COMPOSE_HELPERS_FILE := docker-compose.helpers.yml
 PLEXFLIX_COMPANION_DOCKER_COMPOSE_NZBGET_FILE := ./nzbget/docker-compose.nzbget.yml
@@ -27,13 +28,13 @@ get_service_health = $$(docker inspect --format {{.State.Health.Status}} $(PLEXF
 
 wait_until_service_healthy = { \
 	echo "Waiting for $(1) to be healthy"; \
-  until [[ $(call get_service_health,$(1)) != starting ]]; \
+	until [[ $(call get_service_health,$(1)) != starting ]]; \
 		do sleep 1; \
-  done; \
+	done; \
 	if [[ $(call get_service_health,$(1)) != healthy ]]; \
-    then echo "$(1) failed health check"; \
+		then echo "$(1) failed health check"; \
 		exit 1; \
-  fi; \
+	fi; \
 }
 
 help: ## usage
