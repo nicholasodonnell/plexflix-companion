@@ -1,6 +1,6 @@
 <img src="logo/logo.png" />
 
-Collection of companion services for [nicholasodonnell/plexflix](https://github.com/nicholasodonnell/plexflix).
+Collection of dockerized companion services for [nicholasodonnell/plexflix](https://github.com/nicholasodonnell/plexflix).
 
 ### Requirements
 
