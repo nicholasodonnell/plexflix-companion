@@ -36,13 +36,13 @@ When running the Plexflix companion for the first time, after doing a `make up`:
 
 ## Usage
 
-To bring up Plexflix companions:
+To bring up this collection:
 
 ```
 make up
 ```
 
-To bring down Plexflix companions:
+To bring down this collection:
 
 ```
 make down
@@ -63,7 +63,7 @@ make stop service="<service>"
 To view logs:
 
 ```
-make logs [service="<service>"] [file=/path/to/log/file]
+make logs [service="<service>"] [file="/path/to/log/file"]
 ```
 
 To (re)build one or more services
@@ -76,6 +76,12 @@ To clean the Plexflix companion project (will require another `make build`):
 
 ```
 make clean
+```
+
+To list running services:
+
+```
+make ps
 ```
 
 ## FAQ

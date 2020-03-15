@@ -1,11 +1,11 @@
 version: "3.5"
 services:
   nzbget:
-    container_name: ${PLEXFLIX_COMPANION_PROJECT_NAME}-nzbget
+    container_name: ${PROJECT_NAME}-nzbget
     environment:
-      - PUID=${PLEXFLIX_COMPANION_USER}
-      - PGID=${PLEXFLIX_COMPANION_GROUP}
-      - TZ=${PLEXFLIX_COMPANION_TIMEZONE}
+      - PUID=${USER}
+      - PGID=${GROUP}
+      - TZ=${TIMEZONE}
     image: linuxserver/nzbget:latest
     networks:
       - plexflix-companion
@@ -14,4 +14,4 @@ services:
     restart: unless-stopped
     volumes:
       - ${NZBGET_CONFIG_PATH}:/config:delegated
-      - ${PLEXFLIX_COMPANION_DOWNLOADS_PATH}:/downloads:delegated
+      - ${DOWNLOADS_PATH}:/downloads:delegated

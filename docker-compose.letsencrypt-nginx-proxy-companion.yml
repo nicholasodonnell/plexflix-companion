@@ -1,0 +1,38 @@
+version: "3.5"
+services:
+  nzbget:
+    environment:
+      - LETSENCRYPT_HOST=${NZBGET_HOST}
+      - VIRTUAL_HOST=${NZBGET_HOST}
+      - VIRTUAL_PORT=6789
+    networks:
+      - external-network
+
+  radarr:
+    environment:
+      # - LETSENCRYPT_HOST=${RADARR_HOST}
+      - VIRTUAL_HOST=${RADARR_HOST}
+      - VIRTUAL_PORT=7878
+    networks:
+      - external-network
+
+  sonarr:
+    environment:
+      - LETSENCRYPT_HOST=${SONARR_HOST}
+      - VIRTUAL_HOST=${SONARR_HOST}
+      - VIRTUAL_PORT=8989
+    networks:
+      - external-network
+
+  tautulli:
+    environment:
+      - LETSENCRYPT_HOST=${TAUTULLI_HOST}
+      - VIRTUAL_HOST=${TAUTULLI_HOST}
+      - VIRTUAL_PORT=8181
+    networks:
+      - external-network
+
+networks:
+  external-network:
+    external:
+      name: ${LETSENCRYPT_NGINX_PROXY_COMPANION_NETWORK}

@@ -6,12 +6,12 @@ services:
     cap_add:
       - MKNOD
       - SYS_ADMIN
-    container_name: ${PLEXFLIX_COMPANION_PROJECT_NAME}-rclone
+    container_name: ${PROJECT_NAME}-rclone
     devices:
       - /dev/fuse
     environment:
-      - PUID=${PLEXFLIX_COMPANION_USER}
-      - PGID=${PLEXFLIX_COMPANION_GROUP}
+      - PUID=${USER}
+      - PGID=${GROUP}
       - RCLONE_REMOTE_MOUNT=${RCLONE_REMOTE_MOUNT}
       - RCLONE_MOUNT_OPTIONS=${RCLONE_MOUNT_OPTIONS}
     healthcheck:
@@ -19,7 +19,7 @@ services:
       interval: 10s
       timeout: 10s
       start_period: 10s
-    image: ${PLEXFLIX_COMPANION_PROJECT_NAME}/rclone:latest
+    image: ${PROJECT_NAME}/rclone:latest
     networks:
       - plexflix-companion
     restart: unless-stopped
@@ -27,4 +27,4 @@ services:
       - apparmor:unconfined
     volumes:
       - ${RCLONE_CONFIG_PATH}:/config:delegated
-      - ${PLEXFLIX_COMPANION_LIBRARIES_MOUNT_PATH}:/data:shared
+      - ${LIBRARIES_MOUNT_PATH}:/data:shared
