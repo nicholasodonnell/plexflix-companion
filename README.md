@@ -20,7 +20,7 @@ Collection of dockerized companion services for [nicholasodonnell/plexflix](http
 ## Installation
 
 1. Install fuse on your system (optional).
-2. Create a `.env` file using [`.env.example`](.env.example) as a reference.
+2. Create a `.env` file using [`.env.example`](.env.example) as a reference: `cp -n .env{.example,}`.
 3. Build the Plexflix companion docker images by running `make build`
 4. Create the Rclone configuration files by running `make rclone-setup` and following the prompts.
 5. Create a `.mountcheck` file on Google Drive. This file will tell the Plexflix companions your mount is healthy.
@@ -94,22 +94,17 @@ make ps
 | `TIMEZONE`                                  | Timezone to use.                                                                                                                                                                                                                              |
 | `LIBRARIES_MOUNT_PATH`                      | Path on the host to mount Google Drive libraries.                                                                                                                                                                                             |
 | `DOWNLOADS_PATH`                            | Path on the host to mount downloads.                                                                                                                                                                                                          |
-| `LETSENCRYPT_NGINX_PROXY_COMPANION_NETWORK` | _(Optional)_ Name of the external network for proxying services over SSL. See [nicholasodonnell/docker-letsencrypt-nginx-proxy-companion](https://github.com/nicholasodonnell/docker-letsencrypt-nginx-proxy-companion) for more information. |
 | `NZBGET_PORT`                               | Host port for NZBGet.                                                                                                                                                                                                                         |
 | `NZBGET_CONFIG_PATH`                        | Host location for NZBGet configuration files.                                                                                                                                                                                                 |
-| `NZBGET_HOST`                               | _(Optional)_ Virtual host to resolve NZBGet. See [nicholasodonnell/docker-letsencrypt-nginx-proxy-companion](https://github.com/nicholasodonnell/docker-letsencrypt-nginx-proxy-companion) for more information.                              |
 | `RADARR_PORT`                               | Host port for Radarr.                                                                                                                                                                                                                         |
 | `RADARR_CONFIG_PATH`                        | Host location for Radarr configuration files.                                                                                                                                                                                                 |
-| `RADARR_HOST`                               | _(Optional)_ Virtual host to resolve Radarr. See [nicholasodonnell/docker-letsencrypt-nginx-proxy-companion](https://github.com/nicholasodonnell/docker-letsencrypt-nginx-proxy-companion) for more information.                              |
 | `RCLONE_CONFIG_PATH`                        | Host location for Rclone configuration files.                                                                                                                                                                                                 |
 | `RCLONE_MOUNT_OPTIONS`                      | Rclone mount options. See https://rclone.org/commands/rclone_mount for more information.                                                                                                                                                      |
 | `RCLONE_REMOTE_MOUNT`                       | Name of your Rclone mount defined during setup.                                                                                                                                                                                               |
 | `SONARR_PORT`                               | Host port for Sonarrr.                                                                                                                                                                                                                        |
 | `SONARR_CONFIG_PATH`                        | Host location for Sonarr configuration files.                                                                                                                                                                                                 |
-| `SONARR_HOST`                               | _(Optional)_ Virtual host to resolve Sonarr. See [nicholasodonnell/docker-letsencrypt-nginx-proxy-companion](https://github.com/nicholasodonnell/docker-letsencrypt-nginx-proxy-companion) for more information.                              |
 | `TAUTULLI_PORT`                             | Host port for Tautulli.                                                                                                                                                                                                                       |
 | `TAUTULLI_CONFIG_PATH`                      | Host location for Tautulli configuration files.                                                                                                                                                                                               |
-| `TAUTULLI_HOST`                             | _(Optional)_ Virtual host to resolve Tautulli. See [nicholasodonnell/docker-letsencrypt-nginx-proxy-companion](https://github.com/nicholasodonnell/docker-letsencrypt-nginx-proxy-companion) for more information.                            |
 
 ## FAQ
 

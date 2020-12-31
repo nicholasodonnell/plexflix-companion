@@ -1,34 +1,14 @@
 include .env
 
 SHELL := /bin/bash
-DOCKER_COMPOSE_HELPERS_FILE := docker-compose.helpers.yml
-DOCKER_COMPOSE_LETSENCRYPT_NGINX_PROXY_COMPANION_FILE := docker-compose.letsencrypt-nginx-proxy-companion.yml
-DOCKER_COMPOSE_NETWORKS_FILE := docker-compose.networks.yml
-DOCKER_COMPOSE_NZBGET_FILE := ./nzbget/docker-compose.nzbget.yml
-DOCKER_COMPOSE_RADARR_FILE := ./radarr/docker-compose.radarr.yml
-DOCKER_COMPOSE_RCLONE_FILE := ./rclone/docker-compose.rclone.yml
-DOCKER_COMPOSE_SONARR_FILE := ./sonarr/docker-compose.sonarr.yml
-DOCKER_COMPOSE_TAUTULLI_FILE := ./tautulli/docker-compose.tautulli.yml
 PROJECT_DIRECTORY := $(shell pwd)
 PROJECT_NAME := $(if $(PROJECT_NAME),$(PROJECT_NAME),plexflix-companion)
 
 define DOCKER_COMPOSE_ARGS
-	--file ${DOCKER_COMPOSE_HELPERS_FILE} \
-	--file ${DOCKER_COMPOSE_NETWORKS_FILE} \
-	--file ${DOCKER_COMPOSE_NZBGET_FILE} \
-	--file ${DOCKER_COMPOSE_RADARR_FILE} \
-	--file ${DOCKER_COMPOSE_RCLONE_FILE} \
-	--file ${DOCKER_COMPOSE_SONARR_FILE} \
-	--file ${DOCKER_COMPOSE_TAUTULLI_FILE} \
 	--log-level ERROR \
 	--project-directory $(PROJECT_DIRECTORY) \
 	--project-name $(PROJECT_NAME)
 endef
-
-ifdef LETSENCRYPT_NGINX_PROXY_COMPANION_NETWORK
-	DOCKER_COMPOSE_ARGS := ${DOCKER_COMPOSE_ARGS} \
-		--file ${DOCKER_COMPOSE_LETSENCRYPT_NGINX_PROXY_COMPANION_FILE}
-endif
 
 get_service_health = $$(docker inspect --format {{.State.Health.Status}} $(PROJECT_NAME)-$(1))
 
@@ -106,10 +86,6 @@ endif
 
 mount-health: ## check mount health
 	@echo "rclone: $(call get_service_health,rclone)"
-
-	@docker-compose ${DOCKER_COMPOSE_ARGS} \
-		run \
-			list
 
 ps: ## lists running services
 	@docker ps \

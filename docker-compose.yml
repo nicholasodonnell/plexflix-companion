@@ -1,0 +1,111 @@
+version: "3.5"
+services:
+
+  fuse-shared-mount:
+    build:
+      context: ./fuse-shared-mount
+    container_name: fuse-shared-mount
+    image: ${PROJECT_NAME}/fuse-shared-mount:latest
+    networks:
+      - plexflix-companion
+    pid: host
+    privileged: true
+
+  nzbget:
+    container_name: nzbget
+    environment:
+      - PUID=${USER}
+      - PGID=${GROUP}
+      - TZ=${TIMEZONE}
+    image: linuxserver/nzbget:latest
+    networks:
+      - plexflix-companion
+    ports:
+      - ${NZBGET_PORT}:6789
+    restart: unless-stopped
+    volumes:
+      - ${NZBGET_CONFIG_PATH}:/config:delegated
+      - ${DOWNLOADS_PATH}:/downloads:delegated
+
+  radarr:
+    container_name: radarr
+    environment:
+      - PUID=${USER}
+      - PGID=${GROUP}
+      - TZ=${TIMEZONE}
+    image: linuxserver/radarr:latest
+    networks:
+      - plexflix-companion
+    ports:
+      - ${RADARR_PORT}:7878
+    restart: unless-stopped
+    volumes:
+      - ${RADARR_CONFIG_PATH}:/config:delegated
+      - ${LIBRARIES_MOUNT_PATH}:/libraries:shared
+      - ${DOWNLOADS_PATH}:/downloads:delegated
+
+  rclone:
+    build:
+      context: ./rclone
+    cap_add:
+      - MKNOD
+      - SYS_ADMIN
+    container_name: rclone
+    devices:
+      - /dev/fuse
+    environment:
+      - PUID=${USER}
+      - PGID=${GROUP}
+      - RCLONE_REMOTE_MOUNT=${RCLONE_REMOTE_MOUNT}
+      - RCLONE_MOUNT_OPTIONS=${RCLONE_MOUNT_OPTIONS}
+    healthcheck:
+      test: "[ -f /data/.mountcheck ] && exit 0 || exit 1"
+      interval: 10s
+      timeout: 10s
+      start_period: 10s
+    image: ${PROJECT_NAME}/rclone:latest
+    networks:
+      - plexflix-companion
+    restart: unless-stopped
+    security_opt:
+      - apparmor:unconfined
+    volumes:
+      - ${RCLONE_CONFIG_PATH}:/config:delegated
+      - ${LIBRARIES_MOUNT_PATH}:/data:shared
+
+  sonarr:
+    container_name: sonarr
+    environment:
+      - PUID=${USER}
+      - PGID=${GROUP}
+      - TZ=${TIMEZONE}
+    image: linuxserver/sonarr:latest
+    networks:
+      - plexflix-companion
+    ports:
+      - ${SONARR_PORT}:8989
+    restart: unless-stopped
+    volumes:
+      - ${SONARR_CONFIG_PATH}:/config:delegated
+      - ${LIBRARIES_MOUNT_PATH}:/libraries:shared
+      - ${DOWNLOADS_PATH}:/downloads:delegated
+
+  tautulli:
+    container_name: tautulli
+    environment:
+      - PUID=${USER}
+      - PGID=${GROUP}
+      - TZ=${TIMEZONE}
+    image: linuxserver/tautulli:latest
+    networks:
+      - plexflix-companion
+    ports:
+      - ${TAUTULLI_PORT}:8181
+    restart: unless-stopped
+    volumes:
+      - ${TAUTULLI_CONFIG_PATH}:/config:delegated
+
+networks:
+  plexflix-companion:
+    driver: bridge
+    name: plexflix-companion
