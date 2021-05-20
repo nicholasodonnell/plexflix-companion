@@ -12,4 +12,3 @@ chown -R abc:abc /config
 chown -R abc:abc /dev/fuse
 chown -R abc:abc /etc/mtab
 chmod a+x /dev/fuse
-chmod 644 /etc/mtab
