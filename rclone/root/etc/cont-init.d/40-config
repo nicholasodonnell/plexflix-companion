@@ -2,7 +2,6 @@
 
 # make dirs
 mkdir -p /config
-mkdir -p /dev/fuse
 
 # make empty conf file
 touch /config/.rclone.conf
@@ -10,5 +9,4 @@ touch /config/.rclone.conf
 # permissions
 chown -R abc:abc /config
 chown -R abc:abc /dev/fuse
-chown -R abc:abc /etc/mtab
 chmod a+x /dev/fuse
