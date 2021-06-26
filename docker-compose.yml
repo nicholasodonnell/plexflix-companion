@@ -76,7 +76,7 @@ services:
 
   sonarr:
     build:
-      context: ./radarr
+      context: ./sonarr
     container_name: sonarr
     environment:
       - PUID=${USER}
