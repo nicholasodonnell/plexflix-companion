@@ -5,40 +5,42 @@ services:
     build:
       context: ./fuse-shared-mount
     container_name: fuse-shared-mount
-    image: ${PROJECT_NAME}/fuse-shared-mount:latest
+    image: plexflix-companion/fuse-shared-mount:latest
     networks:
       - plexflix-companion
     pid: host
     privileged: true
 
   nzbget:
+    build:
+      context: ./nzbget
     container_name: nzbget
     environment:
       - PUID=${USER}
       - PGID=${GROUP}
       - TZ=${TIMEZONE}
-    image: linuxserver/nzbget:latest
+    image: plexflix-companion/nzbget:latest
     networks:
       - plexflix-companion
     ports:
       - ${NZBGET_PORT}:6789
-    restart: unless-stopped
     volumes:
       - ${NZBGET_CONFIG_PATH}:/config:delegated
       - ${DOWNLOADS_PATH}:/downloads:delegated
 
   radarr:
+    build:
+      context: ./radarr
     container_name: radarr
     environment:
       - PUID=${USER}
       - PGID=${GROUP}
       - TZ=${TIMEZONE}
-    image: linuxserver/radarr:latest
+    image: plexflix-companion/radarr:latest
     networks:
       - plexflix-companion
     ports:
       - ${RADARR_PORT}:7878
-    restart: unless-stopped
     volumes:
       - ${RADARR_CONFIG_PATH}:/config:delegated
       - ${LIBRARIES_MOUNT_PATH}:/libraries:shared
@@ -63,10 +65,9 @@ services:
       interval: 10s
       timeout: 10s
       start_period: 10s
-    image: ${PROJECT_NAME}/rclone:latest
+    image: plexflix-companion/rclone:latest
     networks:
       - plexflix-companion
-    restart: unless-stopped
     security_opt:
       - apparmor:unconfined
     volumes:
@@ -74,34 +75,36 @@ services:
       - ${LIBRARIES_MOUNT_PATH}:/data:shared
 
   sonarr:
+    build:
+      context: ./radarr
     container_name: sonarr
     environment:
       - PUID=${USER}
       - PGID=${GROUP}
       - TZ=${TIMEZONE}
-    image: linuxserver/sonarr:latest
+    image: plexflix-companion/sonarr:latest
     networks:
       - plexflix-companion
     ports:
       - ${SONARR_PORT}:8989
-    restart: unless-stopped
     volumes:
       - ${SONARR_CONFIG_PATH}:/config:delegated
       - ${LIBRARIES_MOUNT_PATH}:/libraries:shared
       - ${DOWNLOADS_PATH}:/downloads:delegated
 
   tautulli:
+    build:
+      context: ./tautulli
     container_name: tautulli
     environment:
       - PUID=${USER}
       - PGID=${GROUP}
       - TZ=${TIMEZONE}
-    image: linuxserver/tautulli:latest
+    image: plexflix-companion/tautulli:latest
     networks:
       - plexflix-companion
     ports:
       - ${TAUTULLI_PORT}:8181
-    restart: unless-stopped
     volumes:
       - ${TAUTULLI_CONFIG_PATH}:/config:delegated
 

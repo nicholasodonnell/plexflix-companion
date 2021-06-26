@@ -36,28 +36,16 @@ When running the Plexflix companion for the first time, after doing a `make up`:
 
 ## Usage
 
-To bring up this collection:
+To start the collection:
 
 ```
 make up
 ```
 
-To bring down this collection:
+To stop the collection:
 
 ```
 make down
-```
-
-To restart a service:
-
-```
-make restart service="<service>"
-```
-
-To stop a service:
-
-```
-make stop service="<service>"
 ```
 
 To view logs:
@@ -66,29 +54,28 @@ To view logs:
 make logs [service="<service>"] [file="/path/to/log/file"]
 ```
 
-To (re)build one or more services
+To build docker images:
 
 ```
-make build [service="<service>"]
+make build
 ```
 
-To clean the Plexflix companion project (will require another `make build`):
+To remove docker images:
 
 ```
 make clean
 ```
 
-To list running services:
+To see the health of the Rclone mount:
 
 ```
-make ps
+make mount-health
 ```
 
 ## ENV Options
 
 | Option                                      | Description                                                                                                                                                                                                                                   |
 | ------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `PROJECT_NAME`                              | The docker compose project name.                                                                                                                                                                                                              |
 | `USER`                                      | `PUID` of user for volume mounts. Ensures any volume directories on the host are owned by the same user to avoid any permissions issues.                                                                                                      |
 | `GROUP`                                     | `PGID` of user for volume mounts. Ensures any volume directories on the host are owned by the same user to avoid any permissions issues.                                                                                                      |
 | `TIMEZONE`                                  | Timezone to use.                                                                                                                                                                                                                              |
@@ -109,3 +96,5 @@ make ps
 ## FAQ
 
 If you get an error such as `..is mounted on /Users but it is not a shared mount...` run `make fuse-shared-mount dir=/Users` where `dir` is your root directory.
+
+If you get an error such as `...mount: /host_mnt/dir: not mount point or bad option...` turn off `Use gRPC FUSE for file sharing` in your Docker preferences.
