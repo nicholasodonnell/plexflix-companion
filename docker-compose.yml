@@ -15,6 +15,8 @@ services:
     build:
       context: ./nzbget
     container_name: nzbget
+    env_file:
+      - .env
     environment:
       - PUID=${USER}
       - PGID=${GROUP}
@@ -32,6 +34,8 @@ services:
     build:
       context: ./radarr
     container_name: radarr
+    env_file:
+      - .env
     environment:
       - PUID=${USER}
       - PGID=${GROUP}
@@ -55,6 +59,8 @@ services:
     container_name: rclone
     devices:
       - /dev/fuse
+    env_file:
+      - .env
     environment:
       - PUID=${USER}
       - PGID=${GROUP}
@@ -78,6 +84,8 @@ services:
     build:
       context: ./sonarr
     container_name: sonarr
+    env_file:
+      - .env
     environment:
       - PUID=${USER}
       - PGID=${GROUP}
@@ -96,6 +104,8 @@ services:
     build:
       context: ./tautulli
     container_name: tautulli
+    env_file:
+      - .env
     environment:
       - PUID=${USER}
       - PGID=${GROUP}
