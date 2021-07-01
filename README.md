@@ -21,9 +21,10 @@ Collection of dockerized companion services for [nicholasodonnell/plexflix](http
 
 1. Install fuse on your system (optional).
 2. Create a `.env` file using [`.env.example`](.env.example) as a reference: `cp -n .env{.example,}`.
-3. Build the Plexflix companion docker images by running `make build`
-4. Create the Rclone configuration files by running `make rclone-setup` and following the prompts.
-5. Create a `.mountcheck` file on Google Drive. This file will tell the Plexflix companions your mount is healthy.
+3. Create a `docker-compose.override.yml` file using [`docker-compose.override.example.yml`](docker-compose.override.example.yml) as a reference: `cp -n docker-compose.override{.example,}.yml`.
+4. Build the Plexflix companion docker images by running `make build`
+5. Create the Rclone configuration files by running `make rclone-setup` and following the prompts.
+6. Create a `.mountcheck` file on Google Drive. This file will tell the Plexflix companions your mount is healthy.
 
 ## Setup
 

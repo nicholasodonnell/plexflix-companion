@@ -1,0 +1,18 @@
+version: "3.5"
+services:
+
+  nzbget:
+    ports:
+      - ${NZBGET_PORT}:6789
+
+  radarr:
+    ports:
+      - ${RADARR_PORT}:7878
+
+  sonarr:
+    ports:
+      - ${SONARR_PORT}:8989
+
+  tautulli:
+    ports:
+      - ${TAUTULLI_PORT}:8181

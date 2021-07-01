@@ -21,11 +21,11 @@ services:
       - PUID=${USER}
       - PGID=${GROUP}
       - TZ=${TIMEZONE}
+    expose:
+      - 6789
     image: plexflix-companion/nzbget:latest
     networks:
       - plexflix-companion
-    ports:
-      - ${NZBGET_PORT}:6789
     volumes:
       - ${NZBGET_CONFIG_PATH}:/config:delegated
       - ${DOWNLOADS_PATH}:/downloads:delegated
@@ -40,11 +40,11 @@ services:
       - PUID=${USER}
       - PGID=${GROUP}
       - TZ=${TIMEZONE}
+    expose:
+      - 7878
     image: plexflix-companion/radarr:latest
     networks:
       - plexflix-companion
-    ports:
-      - ${RADARR_PORT}:7878
     volumes:
       - ${RADARR_CONFIG_PATH}:/config:delegated
       - ${LIBRARIES_MOUNT_PATH}:/libraries:shared
@@ -90,11 +90,11 @@ services:
       - PUID=${USER}
       - PGID=${GROUP}
       - TZ=${TIMEZONE}
+    expose:
+      - 8989
     image: plexflix-companion/sonarr:latest
     networks:
       - plexflix-companion
-    ports:
-      - ${SONARR_PORT}:8989
     volumes:
       - ${SONARR_CONFIG_PATH}:/config:delegated
       - ${LIBRARIES_MOUNT_PATH}:/libraries:shared
@@ -110,11 +110,11 @@ services:
       - PUID=${USER}
       - PGID=${GROUP}
       - TZ=${TIMEZONE}
+    expose:
+      - 8181
     image: plexflix-companion/tautulli:latest
     networks:
       - plexflix-companion
-    ports:
-      - ${TAUTULLI_PORT}:8181
     volumes:
       - ${TAUTULLI_CONFIG_PATH}:/config:delegated
 
