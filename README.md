@@ -20,8 +20,10 @@ Collection of dockerized companion services for [nicholasodonnell/plexflix](http
 ## Installation
 
 1. Install fuse on your system (optional).
-2. Create a `.env` file using [`.env.example`](.env.example) as a reference: `cp -n .env{.example,}`.
-3. Create a `docker-compose.override.yml` file using [`docker-compose.override.example.yml`](docker-compose.override.example.yml) as a reference: `cp -n docker-compose.override{.example,}.yml`.
+2. Create a `.env` file using [`.env.example`](.env.example) as a reference:
+  `cp -n .env{.example,}`.
+3. Create a `docker-compose.override.yml` file using [`docker-compose.override.example.yml`](docker-compose.override.example.yml) as a reference:
+  `cp -n docker-compose.override{.example,}.yml`.
 4. Build the Plexflix companion docker images by running `make build`
 5. Create the Rclone configuration files by running `make rclone-setup` and following the prompts.
 6. Create a `.mountcheck` file on Google Drive. This file will tell the Plexflix companions your mount is healthy.
@@ -75,24 +77,24 @@ make mount-health
 
 ## ENV Options
 
-| Option                                      | Description                                                                                                                                                                                                                                   |
-| ------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `USER`                                      | `PUID` of user for volume mounts. Ensures any volume directories on the host are owned by the same user to avoid any permissions issues.                                                                                                      |
-| `GROUP`                                     | `PGID` of user for volume mounts. Ensures any volume directories on the host are owned by the same user to avoid any permissions issues.                                                                                                      |
-| `TIMEZONE`                                  | Timezone to use.                                                                                                                                                                                                                              |
-| `LIBRARIES_MOUNT_PATH`                      | Path on the host to mount Google Drive libraries.                                                                                                                                                                                             |
-| `DOWNLOADS_PATH`                            | Path on the host to mount downloads.                                                                                                                                                                                                          |
-| `NZBGET_PORT`                               | Host port for NZBGet.                                                                                                                                                                                                                         |
-| `NZBGET_CONFIG_PATH`                        | Host location for NZBGet configuration files.                                                                                                                                                                                                 |
-| `RADARR_PORT`                               | Host port for Radarr.                                                                                                                                                                                                                         |
-| `RADARR_CONFIG_PATH`                        | Host location for Radarr configuration files.                                                                                                                                                                                                 |
-| `RCLONE_CONFIG_PATH`                        | Host location for Rclone configuration files.                                                                                                                                                                                                 |
-| `RCLONE_MOUNT_OPTIONS`                      | Rclone mount options. See https://rclone.org/commands/rclone_mount for more information.                                                                                                                                                      |
-| `RCLONE_REMOTE_MOUNT`                       | Name of your Rclone mount defined during setup.                                                                                                                                                                                               |
-| `SONARR_PORT`                               | Host port for Sonarrr.                                                                                                                                                                                                                        |
-| `SONARR_CONFIG_PATH`                        | Host location for Sonarr configuration files.                                                                                                                                                                                                 |
-| `TAUTULLI_PORT`                             | Host port for Tautulli.                                                                                                                                                                                                                       |
-| `TAUTULLI_CONFIG_PATH`                      | Host location for Tautulli configuration files.                                                                                                                                                                                               |
+| Option                 | Description                                                                                                                              |
+| ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| `USER`                 | `PUID` of user for volume mounts. Ensures any volume directories on the host are owned by the same user to avoid any permissions issues. |
+| `GROUP`                | `PGID` of user for volume mounts. Ensures any volume directories on the host are owned by the same user to avoid any permissions issues. |
+| `TIMEZONE`             | Timezone to use.                                                                                                                         |
+| `LIBRARIES_MOUNT_PATH` | Path on the host to mount Google Drive libraries.                                                                                        |
+| `DOWNLOADS_PATH`       | Path on the host to mount downloads.                                                                                                     |
+| `NZBGET_PORT`          | Host port for NZBGet.                                                                                                                    |
+| `NZBGET_CONFIG_PATH`   | Host location for NZBGet configuration files.                                                                                            |
+| `RADARR_PORT`          | Host port for Radarr.                                                                                                                    |
+| `RADARR_CONFIG_PATH`   | Host location for Radarr configuration files.                                                                                            |
+| `RCLONE_CONFIG_PATH`   | Host location for Rclone configuration files.                                                                                            |
+| `RCLONE_MOUNT_OPTIONS` | Rclone mount options. See https://rclone.org/commands/rclone_mount for more information.                                                 |
+| `RCLONE_REMOTE_MOUNT`  | Name of your Rclone mount defined during setup.                                                                                          |
+| `SONARR_PORT`          | Host port for Sonarrr.                                                                                                                   |
+| `SONARR_CONFIG_PATH`   | Host location for Sonarr configuration files.                                                                                            |
+| `TAUTULLI_PORT`        | Host port for Tautulli.                                                                                                                  |
+| `TAUTULLI_CONFIG_PATH` | Host location for Tautulli configuration files.                                                                                          |
 
 ## FAQ
 
