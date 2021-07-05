@@ -2,17 +2,56 @@ version: "3.5"
 services:
 
   nzbget:
+    environment:
+      - PUID=${USER}
+      - PGID=${GROUP}
+      - TZ=${TIMEZONE}
     ports:
       - ${NZBGET_PORT}:6789
+    volumes:
+      - ${NZBGET_CONFIG_PATH}:/config:delegated
+      - ${DOWNLOADS_PATH}:/downloads:delegated
 
   radarr:
+    environment:
+      - PUID=${USER}
+      - PGID=${GROUP}
+      - TZ=${TIMEZONE}
     ports:
       - ${RADARR_PORT}:7878
+    volumes:
+      - ${RADARR_CONFIG_PATH}:/config:delegated
+      - ${LIBRARIES_MOUNT_PATH}:/libraries:shared
+      - ${DOWNLOADS_PATH}:/downloads:delegated
+
+  rclone:
+    environment:
+      - PUID=${USER}
+      - PGID=${GROUP}
+      - RCLONE_REMOTE_MOUNT=${RCLONE_REMOTE_MOUNT}
+      - RCLONE_MOUNT_OPTIONS=${RCLONE_MOUNT_OPTIONS}
+    volumes:
+      - ${RCLONE_CONFIG_PATH}:/config:delegated
+      - ${LIBRARIES_MOUNT_PATH}:/data:shared
 
   sonarr:
+    environment:
+      - PUID=${USER}
+      - PGID=${GROUP}
+      - TZ=${TIMEZONE}
     ports:
       - ${SONARR_PORT}:8989
+    volumes:
+      - ${SONARR_CONFIG_PATH}:/config:delegated
+      - ${LIBRARIES_MOUNT_PATH}:/libraries:shared
+      - ${DOWNLOADS_PATH}:/downloads:delegated
 
   tautulli:
+    environment:
+      - PUID=${USER}
+      - PGID=${GROUP}
+      - TZ=${TIMEZONE}
     ports:
       - ${TAUTULLI_PORT}:8181
+    volumes:
+      - ${TAUTULLI_CONFIG_PATH}:/config:delegated

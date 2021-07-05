@@ -17,18 +17,11 @@ services:
     container_name: nzbget
     env_file:
       - .env
-    environment:
-      - PUID=${USER}
-      - PGID=${GROUP}
-      - TZ=${TIMEZONE}
     expose:
       - 6789
     image: plexflix-companion/nzbget:latest
     networks:
       - plexflix-companion
-    volumes:
-      - ${NZBGET_CONFIG_PATH}:/config:delegated
-      - ${DOWNLOADS_PATH}:/downloads:delegated
 
   radarr:
     build:
@@ -36,19 +29,11 @@ services:
     container_name: radarr
     env_file:
       - .env
-    environment:
-      - PUID=${USER}
-      - PGID=${GROUP}
-      - TZ=${TIMEZONE}
     expose:
       - 7878
     image: plexflix-companion/radarr:latest
     networks:
       - plexflix-companion
-    volumes:
-      - ${RADARR_CONFIG_PATH}:/config:delegated
-      - ${LIBRARIES_MOUNT_PATH}:/libraries:shared
-      - ${DOWNLOADS_PATH}:/downloads:delegated
 
   rclone:
     build:
@@ -61,11 +46,6 @@ services:
       - /dev/fuse
     env_file:
       - .env
-    environment:
-      - PUID=${USER}
-      - PGID=${GROUP}
-      - RCLONE_REMOTE_MOUNT=${RCLONE_REMOTE_MOUNT}
-      - RCLONE_MOUNT_OPTIONS=${RCLONE_MOUNT_OPTIONS}
     healthcheck:
       test: "[ -f /data/.mountcheck ] && exit 0 || exit 1"
       interval: 10s
@@ -76,9 +56,6 @@ services:
       - plexflix-companion
     security_opt:
       - apparmor:unconfined
-    volumes:
-      - ${RCLONE_CONFIG_PATH}:/config:delegated
-      - ${LIBRARIES_MOUNT_PATH}:/data:shared
 
   sonarr:
     build:
@@ -86,19 +63,11 @@ services:
     container_name: sonarr
     env_file:
       - .env
-    environment:
-      - PUID=${USER}
-      - PGID=${GROUP}
-      - TZ=${TIMEZONE}
     expose:
       - 8989
     image: plexflix-companion/sonarr:latest
     networks:
       - plexflix-companion
-    volumes:
-      - ${SONARR_CONFIG_PATH}:/config:delegated
-      - ${LIBRARIES_MOUNT_PATH}:/libraries:shared
-      - ${DOWNLOADS_PATH}:/downloads:delegated
 
   tautulli:
     build:
@@ -106,17 +75,11 @@ services:
     container_name: tautulli
     env_file:
       - .env
-    environment:
-      - PUID=${USER}
-      - PGID=${GROUP}
-      - TZ=${TIMEZONE}
     expose:
       - 8181
     image: plexflix-companion/tautulli:latest
     networks:
       - plexflix-companion
-    volumes:
-      - ${TAUTULLI_CONFIG_PATH}:/config:delegated
 
 networks:
   plexflix-companion:
